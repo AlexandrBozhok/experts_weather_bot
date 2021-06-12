@@ -35,7 +35,7 @@ def home(message):
 
 @bot.message_handler(content_types='voice')
 def home(message):
-    msg = f'{message.from_user.first_name}, мая твая не панімать)'
+    msg = f'{message.from_user.first_name}, не розумію)'
     bot.reply_to(message, msg)
 
 
@@ -86,4 +86,4 @@ def get_weather_icon(weatherID):
     else:
         return defaultEmoji
 
-bot.polling(none_stop=True)
+bot.polling()
