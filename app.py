@@ -3,6 +3,7 @@ import requests, telebot, os
 telegram_token = os.environ.get('telegram_token')
 weather_token = os.environ.get('weather_token')
 bot = telebot.TeleBot(telegram_token)
+author_name = os.environ.get('author_name')
 
 
 thunderstorm = u'\U0001F4A8'    # Code: 200's, 900, 901, 902, 905
@@ -21,7 +22,7 @@ defaultEmoji = u'\U0001F300'    # default emojis
 def welcome(message):
     icon = '😁'
     welcome_msg = f'Привіт, {message.from_user.first_name}! {icon}\n' \
-                  f'Я бот, створений Олександром для отримання погоди\n' \
+                  f'Я бот, створений {author_name} для отримання погоди\n' \
                   f'Щоб розпочати, напиши в чат своє місто'
     bot.send_message(message.from_user.id, welcome_msg)
 
