@@ -1,10 +1,12 @@
 import requests, telebot, os
-
+from flask import Flask
 telegram_token = os.environ.get('telegram_token')
 weather_token = os.environ.get('weather_token')
 bot = telebot.TeleBot(telegram_token)
 author_name = os.environ.get('author_name')
 
+
+app = Flask(__name__)
 
 thunderstorm = u'\U0001F4A8'    # Code: 200's, 900, 901, 902, 905
 drizzle = u'\U0001F4A7'         # Code: 300's
@@ -17,6 +19,10 @@ fewClouds = u'\U000026C5'       # Code: 801 sun behind clouds
 clouds = u'\U00002601'          # Code: 802-803-804 clouds general
 hot = u'\U0001F525'             # Code: 904
 defaultEmoji = u'\U0001F300'    # default emojis
+
+@app.route('/')
+def home():
+    return '<h1>Robocode</h1>'
 
 @bot.message_handler(commands=['start'])
 def welcome(message):
@@ -86,4 +92,6 @@ def get_weather_icon(weatherID):
     else:
         return defaultEmoji
 
-bot.polling()
+if __name__ == '__main__':
+    app.run()
+    bot.polling()
